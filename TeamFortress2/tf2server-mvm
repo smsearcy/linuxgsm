@@ -1,5 +1,5 @@
 #!/bin/bash
-# Insurgency
+# Team Fortress 2
 # Server Management Script
 # Author: Daniel Gibbs
 # Website: http://danielgibbs.co.uk
@@ -17,26 +17,26 @@ steamuser="anonymous"
 steampass=""
 
 # Start Variables
-defaultmap="district_coop"
+defaultmap="mvm_decoy"
 maxplayers="32"
-port="27017"
-sourcetvport="27022"
-clientport="27007"
+port="27016"
+sourcetvport="27021"
+clientport="27006"
 ip="0.0.0.0"
 
 # https://developer.valvesoftware.com/wiki/Command_Line_Options#Source_Dedicated_Server
 fn_parms(){
-parms="-game insurgency -strictportbind -ip ${ip} -port ${port} +clientport ${clientport} +tv_port ${sourcetvport} +map ${defaultmap} +servercfgfile ${servercfg} -maxplayers ${maxplayers}"
+parms="-game tf -strictportbind -ip ${ip} -port ${port} +clientport ${clientport} +tv_port ${sourcetvport} +map ${defaultmap} +servercfgfile ${servercfg} -maxplayers ${maxplayers}"
 }
 
 #### Advanced Variables ####
 
 # Steam
-appid="237410"
+appid="232250"
 
 # Server Details
-servicename="ins-server"
-gamename="Insurgency"
+servicename="tf2-server-mvm"
+gamename="Team Fortress 2"
 engine="source"
 
 # Directories
@@ -44,9 +44,9 @@ rootdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 selfname="$(basename $0)"
 lockselfname=".${servicename}.lock"
 filesdir="${rootdir}/serverfiles"
-systemdir="${filesdir}/insurgency"
+systemdir="${filesdir}/tf"
 executabledir="${filesdir}"
-executable="./srcds_linux"
+executable="./srcds_run"
 servercfgdir="${systemdir}/cfg"
 servercfg="${servicename}.cfg"
 servercfgfullpath="${servercfgdir}/${servercfg}"

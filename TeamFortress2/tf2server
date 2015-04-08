@@ -17,7 +17,7 @@ steamuser="anonymous"
 steampass=""
 
 # Start Variables
-defaultmap="cp_badlands"
+defaultmap="koth_king"
 maxplayers="16"
 port="27015"
 sourcetvport="27020"
