@@ -1,10 +1,9 @@
 #!/bin/bash
-# ARMA 3
+# NS2: Combat
 # Server Management Script
 # Author: Daniel Gibbs
-# Contributor: Scarsz
 # Website: http://danielgibbs.co.uk
-# Version: 240415
+# Version: 210115
 
 #### Variables ####
 
@@ -17,52 +16,51 @@ email="email@example.com"
 steamuser="username"
 steampass="password"
 
-# Server IP
+# Start Variables
+defaultmap="co_core"
+port="27015"
+maxplayers="24"
 ip="0.0.0.0"
+servername="NS2C Server"
+webadminuser="admin"
+webadminpass="admin"
+webadminport="8080"
+configpath="server1"
+modstorage="server1/Workshop"
+mods=""
+password=""
+# Add the following line to the parms if you want a private server. Ensuring
+# that the password variable above is not left empty.
+# -password \"${password}\"
 
+# http://wiki.unknownworlds.com/ns2/Dedicated_Server
 fn_parms(){
-parms="-netlog -ip=${ip} -cfg=${networkcfgfullpath} -config=${servercfgfullpath} -mod=${mods}"
+parms="-name \"${servername}\" -port ${port} -webadmin -webdomain ${ip} -webuser ${webadminuser} -webpassword \"${webadminpass}\" -webport ${webadminport} -map ${defaultmap} -limit ${maxplayers} -config_path \"${rootdir}/${configpath}\" -modstorage \"${rootdir}/${modstorage}\" -mods \"${mods}\""
 }
 
 #### Advanced Variables ####
 
-# ARMA 3 Modules
-# add mods with relative paths:
-# mods/\@CBA_A3\;
-# or several mods as:
-# mods/\@CBA_A3\;mods/\@task_force_radio
-# and chmod modules directories to 775
-mods=""
-
 # Steam
-# Stable
-appid="233780"
-# Development
-# appid="233780 -beta development"
+appid="313900"
 
 # Server Details
-servicename="arma3-server"
-gamename="ARMA 3"
-engine="realvirtuality"
+servicename="ns2c-server"
+gamename="NS2: Combat"
+engine="spark"
 
 # Directories
-rootdir="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd )"
+rootdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 selfname="$(basename $0)"
 lockselfname=".${servicename}.lock"
 filesdir="${rootdir}/serverfiles"
 systemdir="${filesdir}"
-executabledir="${filesdir}"
-executable="./arma3server"
-servercfgdir="${systemdir}/cfg"
-servercfg="${servicename}.server.cfg"
-networkcfg="${servicename}.network.cfg"
-servercfgfullpath="${servercfgdir}/${servercfg}"
-networkcfgfullpath="${servercfgdir}/${networkcfg}"
+executabledir="${filesdir}/ia32"
+executable="./ns2combatserver_linux32"
 backupdir="${rootdir}/backups"
 
 # Logging
 logdays="7"
-#gamelogdir="" # No server logs available
+gamelogdir="${systemdir}/logs"
 scriptlogdir="${rootdir}/log/script"
 consolelogdir="${rootdir}/log/console"
 

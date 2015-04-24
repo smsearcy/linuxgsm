@@ -1,10 +1,9 @@
 #!/bin/bash
-# ARMA 3
+# Project Zomboid
 # Server Management Script
 # Author: Daniel Gibbs
-# Contributor: Scarsz
 # Website: http://danielgibbs.co.uk
-# Version: 240415
+# Version: 150415
 
 #### Variables ####
 
@@ -14,55 +13,43 @@ emailnotification="off"
 email="email@example.com"
 
 # Steam login
-steamuser="username"
-steampass="password"
+steamuser="anonymous"
+steampass=""
 
-# Server IP
+# Start Variables
 ip="0.0.0.0"
 
 fn_parms(){
-parms="-netlog -ip=${ip} -cfg=${networkcfgfullpath} -config=${servercfgfullpath} -mod=${mods}"
+parms=""
 }
 
 #### Advanced Variables ####
 
-# ARMA 3 Modules
-# add mods with relative paths:
-# mods/\@CBA_A3\;
-# or several mods as:
-# mods/\@CBA_A3\;mods/\@task_force_radio
-# and chmod modules directories to 775
-mods=""
-
 # Steam
-# Stable
-appid="233780"
-# Development
-# appid="233780 -beta development"
+appid="108600"
 
 # Server Details
-servicename="arma3-server"
-gamename="ARMA 3"
-engine="realvirtuality"
+servicename="pz-server"
+gamename="Project Zomboid"
+engine="projectzomboid"
 
 # Directories
-rootdir="$(cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd )"
+rootdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 selfname="$(basename $0)"
 lockselfname=".${servicename}.lock"
 filesdir="${rootdir}/serverfiles"
-systemdir="${filesdir}"
+systemdir="${filesdir}/projectzomboid"
 executabledir="${filesdir}"
-executable="./arma3server"
-servercfgdir="${systemdir}/cfg"
-servercfg="${servicename}.server.cfg"
-networkcfg="${servicename}.network.cfg"
+executable="./projectzomboid-dedi-server.sh"
+servercfgdir="${rootdir}/Zomboid/Server"
+servercfg="servertest.ini"
 servercfgfullpath="${servercfgdir}/${servercfg}"
-networkcfgfullpath="${servercfgdir}/${networkcfg}"
+defaultcfg="${servercfgdir}/servertest.ini"
 backupdir="${rootdir}/backups"
 
 # Logging
 logdays="7"
-#gamelogdir="" # No server logs available
+gamelogdir="${HOME}/Zomboid/Logs"
 scriptlogdir="${rootdir}/log/script"
 consolelogdir="${rootdir}/log/console"
 
